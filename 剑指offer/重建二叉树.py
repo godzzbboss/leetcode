@@ -35,8 +35,8 @@ class Solution:
         # root_idx = 0
         # while tin[root_idx] != pre[0]:
         #     root_idx += 1
-        root_idx = tin.index(pre[0])
-        left_len = l - root_idx + 1  # 左子树节点个数
+        root_idx = tin.index(pre[0]) # 根节点索引位置
+        left_len = root_idx  # 左子树节点个数
         if left_len > 0:
             # 构建左子树
             root.left = self.reConstructBinaryTree(pre[1: 1 + root_idx], tin[0: root_idx])
