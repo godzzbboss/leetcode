@@ -17,3 +17,6 @@ class Solution:
             n = n >> 1
             nums += 1
         return count
+
+import math
+math.isclose()
