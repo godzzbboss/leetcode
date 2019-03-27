@@ -25,6 +25,24 @@ class Solution():
             p = t_p
         return pre
 
+
+    """
+        递归实现, python版本递归实现超时
+    
+    """
+    def test(self, head):
+        if head is None or head.next is None:
+            return head
+
+        result = self.test(head.next)
+        head.next.next = head
+        head.next = None
+
+        return result
+
+
+
+
 if __name__ == "__main__":
     s = Solution()
     print(s.test())
