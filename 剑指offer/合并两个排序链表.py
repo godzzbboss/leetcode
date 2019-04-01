@@ -54,7 +54,7 @@ class Solution():
             rear.next = head2
         elif head2 is None: # 将head2剩余部分进行链接
             rear.next = head1
-        return root
+        return root.next
 
 if __name__ == "__main__":
     s = Solution()
