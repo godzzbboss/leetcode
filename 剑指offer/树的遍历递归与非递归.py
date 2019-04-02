@@ -96,6 +96,27 @@ class Solution:
 
         return result
 
+    def layer_travel_1(self, root):
+        """层次遍历时记录每层节点个数"""
+        if not root: return []
+
+        result = []
+        queue = []
+        queue.append(root)
+        while queue:
+            len_level = len(queue) # 当前层的长度
+            sub_result = []
+            for _ in range(len_level):
+                cur = queue.pop(0)
+                sub_result.append(cur.val)
+                if cur.left: queue.append(cur.left)
+                if cur.right: queue.append(cur.right)
+            result.append(sub_result)
+
+        return result
+
+
+
 
 
 
