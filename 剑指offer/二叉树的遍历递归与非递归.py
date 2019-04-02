@@ -33,6 +33,23 @@ class Solution:
         return result
 
 
+    def pre_travel2(self, root):
+        """第二种前序遍历的方法"""
+        if not root:
+            return []
+        stack = []
+        result = []
+        stack.append(root)
+        while stack:
+            cur = stack.pop()
+            result.append(cur.val)
+            if cur.right:
+                stack.append(cur.right)
+            if cur.left:
+                stack.append(cur.left)
+        return result
+
+
 
     def in_travel(self, root):
         """中序遍历"""
@@ -69,7 +86,7 @@ class Solution:
             if (not cur.left and not cur.right) or \
                     (pre and (pre is cur.left or pre is cur.right)): # 左右孩子都为空或者左右孩子都已经访问过，则访问根节点
                 result.append(cur.val)
-                cur = stack.pop()
+                cur = stack.pop() # 栈顶节点输出之后才出栈
                 pre = cur # pre指向上一个访问的节点
             else:
                 if cur.right: # 右节点先入栈
