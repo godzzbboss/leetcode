@@ -65,7 +65,7 @@ class Solution:
             else:
                 result.append(cur.val)  # cur的左子树为空，则输出cur
                 cur = cur.right  # 并将cur指向其右子树
-                while cur is None and len(stack) != 0:  # 如果当前节点的右子树为空，并且栈不为空
+                while cur is None and len(stack) != 0:  # 如果当前节点的右子树为空，并且栈不为空，则cur指向当前节点父节点的父节点
                     cur = stack.pop() # 指向当前节点的父节点
                     result.append(cur.val)  # 访问父节点
                     cur = cur.right # 指向父节点的右子树
@@ -84,7 +84,7 @@ class Solution:
         while len(stack) != 0:
             cur = stack[-1] # cur指向栈顶元素
             if (not cur.left and not cur.right) or \
-                    (pre and (pre is cur.left or pre is cur.right)): # 左右孩子都为空或者左右孩子都已经访问过，则访问根节点
+                    (pre and (pre is cur.left or pre is cur.right)): # 左右孩子都为空或者左右孩子都已经访问过，则访问根节点,pre is cur.left说明只有左孩子
                 result.append(cur.val)
                 cur = stack.pop() # 栈顶节点输出之后才出栈
                 pre = cur # pre指向上一个访问的节点
@@ -118,7 +118,7 @@ class Solution:
         if not root: return []
 
         result = []
-        queue = []
+        queue = [] # queue只包含当前层的元素
         queue.append(root)
         while queue:
             len_level = len(queue) # 当前层的长度

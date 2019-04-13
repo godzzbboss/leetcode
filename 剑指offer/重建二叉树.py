@@ -51,4 +51,4 @@ if __name__ == "__main__":
     a = [1, 2, 4, 7, 3, 5, 6, 8]
     b = [4, 7, 2, 1, 5, 3, 8, 6]
     s = solution.reConstructBinaryTree(a, b)
-    print(s.right)
+    print(s.right.left)
