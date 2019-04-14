@@ -22,12 +22,12 @@ class Solution:
             while p1.left:
                 p1 = p1.left
             pnext = p1
-        else:
+        else: # 无右子树
             p1 = pnode
             p2 = pnode.parent
-            if p1 == p2.left:
+            if p1 == p2.left: # 如果是其父节点的左孩子
                 pnext = p2
-            else:
+            else: # 是其父节点的右孩子
                 while p2.left != p1 and p2 != None:
                     p1 = p2
                     p2 = p2.parent
