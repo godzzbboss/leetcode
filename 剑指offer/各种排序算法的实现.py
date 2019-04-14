@@ -10,7 +10,7 @@ class MaoPao:
     @staticmethod
     def sort(array):
         end = len(array) - 1
-        for i in range(end, 0, -1):
+        for i in range(end, 0, -1): # 每次将一个最大的数放在最后一个位置
             flag = False
             for j in range(0, i):
                 if array[j] > array[j+1]:
@@ -40,7 +40,7 @@ class InsertSort:
     def sort(array):
         end = len(array) - 1
         for i in range(1, end+1):
-            for j in range(i, 0, -1): # 找插入位置
+            for j in range(i, 0, -1): # 从后往前找插入位置
                 if array[j] < array[j-1]:
                     array[j], array[j-1] = array[j-1], array[j]
         return array
