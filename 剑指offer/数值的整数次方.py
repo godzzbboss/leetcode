@@ -23,11 +23,13 @@ class Solution():
             flag = 1
         exponent = abs(exponent)
 
-        while exponent and count < 32:
+        base_ = base
+        while exponent and count < 32: # 循环次数为O（logn）
             if exponent & 1 == 1:
-                result *= base
+                result *= base_
             exponent = exponent >> 1
-            base *= base
+            base_ *= base_
+            # print(base_)
             count += 1
         if flag == 1:
             result = 1 / result
@@ -38,5 +40,5 @@ class Solution():
 
 if __name__ == "__main__":
     s = Solution()
-    print(s.test(2,-5))
+    print(s.test(3,3))
 
