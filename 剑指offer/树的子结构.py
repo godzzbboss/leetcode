@@ -33,7 +33,7 @@ class Solution():
 
         if root1.val != root2.val:
             return False
-
+        # root1.val == root2.val
         return self.is_tree1_has_tree2(root1.left, root2.left) and self.is_tree1_has_tree2(root1.right, root2.right) # tree1的左子树和右子树必须包含tree2的左子树和右子树
 
 

@@ -23,9 +23,9 @@ class Solution():
                 sub_result.append(cur.val)
                 if cur.left: queue.append(cur.left)
                 if cur.right: queue.append(cur.right)
-            if count & 1 == 1:
+            if count & 1 == 1: # 奇数行
                 result.append(sub_result)
-            else:
+            else: # 偶数行
                 result.append(sub_result[::-1])
             count += 1
         return result
