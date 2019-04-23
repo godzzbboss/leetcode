@@ -27,7 +27,7 @@ class Solution:
             result.append(cur.val) # 先输出
             stack.append(cur) # 再入栈
             cur = cur.left # 指向左孩子
-            while cur is None and len(stack) != 0: # 如果左孩子为空，一次判断右孩子，直至找到一个不为空的右孩子
+            while cur is None and len(stack) != 0: # 如果左孩子为空，依次判断右孩子，直至找到一个不为空的右孩子
                 cur = stack.pop()
                 cur = cur.right
         return result
