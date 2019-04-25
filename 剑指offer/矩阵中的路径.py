@@ -16,7 +16,7 @@ class Solution():
             return True
         for i in range(rows):
             for j in range(cols):
-                if self.is_has_path(matrix, i, j, s, 0, flag):
+                if self.is_has_path(matrix, rows, cols, i, j, s, 0, flag):
                     return True
         return False
 
