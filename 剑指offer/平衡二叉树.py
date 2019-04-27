@@ -14,6 +14,7 @@ class TreeNode:
 class Solution:
     def test(self, root):
         """层次遍历每一个节点，判断以其为根的子树是否是平衡的"""
+        """平衡二叉树是一根树的所有子树的左右子树的高度差不大于1"""
         if not root:
             return True
         queue = []
