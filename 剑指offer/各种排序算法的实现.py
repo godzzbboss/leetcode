@@ -110,6 +110,7 @@ class MergeSort:
 
 class MergeSort2:
     def merge_sort(self, array):
+        """返回最终排序后的结果"""
         if not array or len(array) == 1:
             return array
         mid = len(array) // 2
@@ -119,6 +120,7 @@ class MergeSort2:
         return res
 
     def merge(self, left, right):
+        """合并两个排序数组"""
         i = j = 0
         res = []
         while i < len(left) and j < len(right):
