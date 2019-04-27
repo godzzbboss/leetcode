@@ -108,6 +108,32 @@ class MergeSort:
             j += 1
             k += 1
 
+class MergeSort2:
+    def merge_sort(self, array):
+        if not array or len(array) == 1:
+            return array
+        mid = len(array) // 2
+        left_array = self.merge_sort(array[:mid])
+        right_array = self.merge_sort(array[mid:])
+        res = self.merge(left_array, right_array)
+        return res
+
+    def merge(self, left, right):
+        i = j = 0
+        res = []
+        while i < len(left) and j < len(right):
+            if left[i] < right[j]:
+                res.append(left[i])
+                i += 1
+            else:
+                res.append(right[j])
+                j += 1
+        if i < len(left):
+            res.extend(left[i:])
+
+        if j < len(right):
+            res.extend(right[j:])
+        return res
 
 class QuickSort:
     # def __init__(self, array):
@@ -197,10 +223,10 @@ if __name__ == "__main__":
     # print("insert:", insert.sort(array))
     # shell_sort = ShellSort()
     # print("shell:", shell_sort.sort(array))
-    # merge_sort = MergeSort()
-    # print(merge_sort.merge_sort(array, 0, len(array)-1))
+    merge_sort = MergeSort2()
+    print(merge_sort.merge_sort(array))
     # quick = QuickSort()
     # print(quick.quick_sort(array, 0, len(array)-1))
 
-    heap_sort = HeapSort()
-    print(heap_sort.heap_sort2(array))
+    # heap_sort = HeapSort()
+    # print(heap_sort.heap_sort2(array))
