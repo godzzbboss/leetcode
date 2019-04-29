@@ -22,18 +22,18 @@ class Solution:
             count += num
             prefix.append(count)
         p1 = 0
-        p2 = 0
+        p2 = 1
 
         res = []
-        while p1 <= p2 and p2 < len(prefix):
-            while p1 <= p2 and p2 < len(prefix) and prefix[p2] - prefix[p1] < target:
+        while p1 < p2 and p2 < len(prefix):
+            while p1 < p2 and p2 < len(prefix) and prefix[p2] - prefix[p1] < target:
                 p2 += 1
-            while p1 <= p2 and p2 < len(prefix) and prefix[p2] - prefix[p1] == target:
+            while p1 < p2 and p2 < len(prefix) and prefix[p2] - prefix[p1] == target:
                 if p2 - p1 >=2: # 序列长度为2才保存
                     res.append([i for i in range(p1+1, p2+1)])
                 p2 += 1
                 p1 += 1
-            while p1 <= p2 and p2 < len(prefix) and prefix[p2] - prefix[p1] > target:
+            while p1 < p2 and p2 < len(prefix) and prefix[p2] - prefix[p1] > target:
                 p1 += 1
         return res
 
