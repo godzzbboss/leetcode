@@ -185,10 +185,9 @@ class HeapSort:
 
         for i in reversed(range(1, len(array))):
             self.build_heap(array, i)
-            array[0], array[i] = array[i], array[0]
+            array[0], array[i] = array[i], array[0] # 将第一个数(即最大堆的堆顶元素)与最后一个数交换
 
         return array
-
 
 
     def adjust_heap(self, array, startpos, end_pos):
@@ -199,7 +198,7 @@ class HeapSort:
         childpos = 2 * startpos + 1 # 初始的时候，childpos指向左孩子节点
         while childpos <= end_pos:
             rightchild = childpos + 1
-            if rightchild <= end_pos and array[childpos] < array[rightchild]:
+            if rightchild <= end_pos and array[childpos] < array[rightchild]: # 左孩子小于右孩子
                 childpos = rightchild
             if array[startpos] > array[childpos]: # 父节点比孩子节点大，不用调整
                 break
