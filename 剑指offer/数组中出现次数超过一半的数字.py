@@ -8,6 +8,7 @@ __author__ == "BigBrother"
 
 class Solution:
     def test(self, array):
+        """思路：出现次数超过一半的数字在排序数组中的下标一定是mid"""
         if not self.check(array):
             return None
         mid = len(array) // 2
@@ -15,18 +16,17 @@ class Solution:
         end = len(array) - 1
         index = self.partition(array, start, end)  # 得到基元的下标
         while index != mid:
-            if index < mid:
+            if index < mid: # index < mid, 只能在index右边的数中进行寻找
                 start = index + 1
                 index = self.partition(array, start, end)
-            else:
+            else: # 在index左边的数中进行寻找
                 end = index - 1
                 index = self.partition(array, start, end)
         return array[index]
 
 
-
     def partition(self, array, start, end):
-        """找到基元的最终位置"""
+        """找到基元在排序数组中的最终位置"""
         pivot = array[start]
         p1 = start + 1
         p2 = end
