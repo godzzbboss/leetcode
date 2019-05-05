@@ -20,7 +20,7 @@ class Solution():
     #     q = l1
     #     p = l2
     #     result = ListNode(-1)  # 头结点
-    #     k = result
+    #     k = result # 尾插法
     #     carry = 0  # 进位
     #     while q or p:
     #         x = q.val if q else 0  # 如果q不为空，将x赋值为q的值，否则为0
@@ -50,7 +50,6 @@ class Solution():
         result = ListNode(-1)  # 头结点
         k = result
         carry = 0  # 进位
-        flag = False
         while q and p:
             x = q.val
             y = p.val
@@ -60,30 +59,26 @@ class Solution():
             cur = ListNode(cur_val)
             k.next = cur # 将结果插入到result后
             k = k.next
-            if q : q = q.next
-            if p : p = p.next
-            if not q: # l1为空
-                flag = True
-        if flag:
-            while p:
-                y = p.val
-                sum = y + carry
-                carry = sum // 10
-                cur_val = sum % 10
-                cur = ListNode(cur_val)
-                k.next = cur  # 将结果插入到result后
-                k = k.next
-                p = p.next
-        else:
-            while q:
-                x = q.val
-                sum = x + carry
-                carry = sum // 10
-                cur_val = sum % 10
-                cur = ListNode(cur_val)
-                k.next = cur  # 将结果插入到result后
-                k = k.next
-                q = q.next
+            q = q.next
+            p = p.next
+        while p:
+            y = p.val
+            sum = y + carry
+            carry = sum // 10
+            cur_val = sum % 10
+            cur = ListNode(cur_val)
+            k.next = cur  # 将结果插入到result后
+            k = k.next
+            p = p.next
+        while q:
+            x = q.val
+            sum = x + carry
+            carry = sum // 10
+            cur_val = sum % 10
+            cur = ListNode(cur_val)
+            k.next = cur  # 将结果插入到result后
+            k = k.next
+            q = q.next
         if carry == 1:
             k.next = ListNode(carry)
         return result.next
