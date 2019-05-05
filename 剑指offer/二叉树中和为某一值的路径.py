@@ -11,7 +11,6 @@ class Solution:
         path = []
         result = []
 
-
         # 如果想在递归的过程中生成最终的结果，保存结果的变量当成递归函数的参数传递
         self.find(root, target, path, result)
         return result
@@ -24,11 +23,12 @@ class Solution:
             result.append(path)
         else:
             if root.left:
-                path_ = copy.deepcopy(path) # !!!python里传递的是引用，所以进行递归时需要进行深拷贝，不然下次递归的结果会影响上次递归
-                self.find(root.left, target-root.val, path_, result)
+                # path_ = copy.deepcopy(path) # !!!python里传递的是引用，所以进行递归时需要进行深拷贝，不然下次递归的结果会影响上次递归
+                # 可以不用进行深拷贝, 只进行浅拷贝就行
+                self.find(root.left, target-root.val, path[:], result)
             if root.right:
-                path_ = copy.deepcopy(path)
-                self.find(root.right, target - root.val, path_, result)
+                # path_ = copy.deepcopy(path)
+                self.find(root.right, target - root.val, path[:], result)
 
 
 
