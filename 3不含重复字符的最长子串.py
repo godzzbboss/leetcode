@@ -39,7 +39,7 @@ class Solution():
                 d[s[p2]] = p2
             else:
                 p1 = max(p1, d[s[p2]] + 1) # error: p1 = d[s[p2]] + 1, 这样可能会造成指针p1回溯
-                # d[s[p2]] = p2
+                d[s[p2]] = p2 # 更新s[p2]的新位置
             res = max(res, p2 - p1 + 1)
             p2 += 1
         return res
