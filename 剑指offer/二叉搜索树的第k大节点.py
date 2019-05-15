@@ -20,7 +20,7 @@ class Solution:
         target, count = self.in_order(root.left, k, count)
         if target:
             return target, count
-        count += 1
+        count += 1 # 遍历根节点
         if count == k:
             return root, count
         target, count = self.in_order(root.right, k, count)
