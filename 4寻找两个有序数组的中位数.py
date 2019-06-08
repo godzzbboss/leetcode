@@ -68,9 +68,10 @@ class Solution():
             return (left + right) / 2
         else:
             return self.find_kth(array1, 0, array2, 0, total_len // 2 + 1)
+
     def find_kth(self, array1, i, array2, j, k):
         """i,j分别为array1和array2开始查找位置， k是要查找的第k个元素"""
-        # 保证array1可查找长度大于array2的查找长度
+        # 保证array1可查找长度小于array2的查找长度
         if len(array1) - i > len(array2) - j:
             return self.find_kth(array2, j, array1, i, k)
         # 如果array1的可查找长度为0

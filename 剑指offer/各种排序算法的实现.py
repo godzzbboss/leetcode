@@ -154,20 +154,18 @@ class QuickSort:
     def partition(self, array, start, end):
         """找到基元的正确位置"""
         pivot = array[start]
-
-        p1 = start + 1
+        p1 = start
         p2 = end
-        while p1 <= p2:
-            while p1 <= p2 and array[p1] <= pivot:
-                p1 += 1
-            while p1 <= p2 and array[p2] >= pivot:
+        while p1 < p2:
+            # 比如5 4 3 2 1 6 7, 如果先移左边的则不对
+            while p1 < p2 and array[p2] >= pivot: # 一定要先移右边的指针
                 p2 -= 1
+            while p1 < p2 and array[p1] <= pivot:
+                p1 += 1
             if p1 < p2:
                 array[p1], array[p2] = array[p2], array[p1]
-
-        array[start] , array[p2] = array[p2], array[start] # 将基元放在正确位置上
-
-        return p2
+        array[start] , array[p2] = array[p2], array[start] # 最后将基元放在正确位置上
+        return p2 # 因为此时p1与p2指向同一个元素，所以指向哪一个都可以
 
 import heapq
 class HeapSort:
@@ -224,10 +222,10 @@ if __name__ == "__main__":
     # print("insert:", insert.sort(array))
     # shell_sort = ShellSort()
     # print("shell:", shell_sort.sort(array))
-    merge_sort = MergeSort2()
-    print(merge_sort.merge_sort(array))
-    # quick = QuickSort()
-    # print(quick.quick_sort(array, 0, len(array)-1))
+    # merge_sort = MergeSort2()
+    # print(merge_sort.merge_sort(array))
+    quick = QuickSort()
+    print(quick.quick_sort(array, 0, len(array)-1))
 
     # heap_sort = HeapSort()
     # print(heap_sort.heap_sort2(array))

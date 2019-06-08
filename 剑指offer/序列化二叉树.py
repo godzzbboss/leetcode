@@ -7,8 +7,7 @@ __author__ == "BigBrother"
 
 
 class Solution:
-
-
+    pass
 
 
 
