@@ -80,33 +80,27 @@ class MergeSort:
         mid = (start + end) // 2
         self.merge_sort(array, start, mid)
         self.merge_sort(array, mid+1, end)
-        self.merge(array, start, end)
-        return array
 
-    def merge(self, array, start,  end):
-        mid = (start + end) // 2
-        left = array[start:mid+1] # ！！！！
-        right = array[mid+1:end+1]
-
-        i = j = 0
-        k = start # ！！！
-        while i < len(left) and j < len(right):
-            if left[i] < right[j]:
-                array[k] = left[i]
-                i += 1
+        # 归并
+        p1, p2 = start, mid+1
+        temp = []
+        while p1 <= mid and p2 <= end:
+            if array[p1] <= array[p2]:
+                temp.append(array[p1])
+                p1 += 1
             else:
-                array[k] = right[j]
-                j += 1
-            k += 1
+                temp.append(array[p2])
+                p2 += 1
+        while p1 <= mid:
+            temp.append(array[p1])
+            p1 += 1
+        while p2 <= end:
+            temp.append(array[p2])
+            p2 += 1
 
-        while i < len(left):
-            array[k] = left[i]
-            i += 1
-            k += 1
-        while j < len(right):
-            array[k] = right[j]
-            j += 1
-            k += 1
+        # 将temp拷贝回原数组
+        for idx, i in enumerate(temp):
+            array[start + idx] = i
 
 class MergeSort2:
     def merge_sort(self, array):
@@ -222,10 +216,12 @@ if __name__ == "__main__":
     # print("insert:", insert.sort(array))
     # shell_sort = ShellSort()
     # print("shell:", shell_sort.sort(array))
-    # merge_sort = MergeSort2()
-    # print(merge_sort.merge_sort(array))
-    quick = QuickSort()
-    print(quick.quick_sort(array, 0, len(array)-1))
+    merge_sort = MergeSort()
+    merge_sort.merge_sort(array, 0, len(array) - 1)
+    print(array)
+
+    # quick = QuickSort()
+    # print(quick.quick_sort(array, 0, len(array)-1))
 
     # heap_sort = HeapSort()
     # print(heap_sort.heap_sort2(array))
