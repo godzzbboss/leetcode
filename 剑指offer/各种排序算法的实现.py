@@ -146,7 +146,7 @@ class QuickSort:
         return array
 
     def partition(self, array, start, end):
-        """找到基元的正确位置"""
+        """找到基元的正确位置, 并将基元放在最终的位置上"""
         pivot = array[start]
         p1 = start
         p2 = end
@@ -216,12 +216,12 @@ if __name__ == "__main__":
     # print("insert:", insert.sort(array))
     # shell_sort = ShellSort()
     # print("shell:", shell_sort.sort(array))
-    merge_sort = MergeSort()
-    merge_sort.merge_sort(array, 0, len(array) - 1)
-    print(array)
+    # merge_sort = MergeSort()
+    # merge_sort.merge_sort(array, 0, len(array) - 1)
+    # print(array)
 
-    # quick = QuickSort()
-    # print(quick.quick_sort(array, 0, len(array)-1))
+    quick = QuickSort()
+    print(quick.quick_sort(array, 0, len(array)-1))
 
     # heap_sort = HeapSort()
     # print(heap_sort.heap_sort2(array))

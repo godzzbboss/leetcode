@@ -16,10 +16,8 @@ class Solution():
 
     def test(self, nums, start, end):
         self.perm(nums, start, end)
-        final_result = []
-        for i in range(len(self.result)):
-            final_result.append(self.result[i][start:end+1])
-        return final_result
+
+        return self.result
 
 
     def perm(self, nums, start, end):
@@ -69,5 +67,5 @@ if __name__ == "__main__":
     s = Solution()
     nums = ["a", "b", "c", "d"]
     # a = s.permut(nums)
-    a = s.test(nums, 1, len(nums) - 1)
+    a = s.test(nums, 0, len(nums) - 1)
     print(a)
