@@ -4,37 +4,39 @@
 __author__ = "BigBrother"
 
 """
+
+
+# -*- coding:utf-8 -*-
 class TreeLinkNode:
-    def __init__(self, val):
-        self.val = val
+    def __init__(self, x):
+        self.val = x
         self.left = None
         self.right = None
-        self.parent = None
+        self.father = None
 
 
 class Solution:
-    def test(self, pnode):
-        if pnode == None or pnode.parent == None:
-            return None
-        pnext = None
-        if pnode.right != None: # 有右子树
-            p1 = pnode.right
-            while p1.left:
-                p1 = p1.left
-            pnext = p1
-        else: # 无右子树
-            p1 = pnode
-            p2 = pnode.parent
-            if p1 == p2.left: # 如果是其父节点的左孩子
-                pnext = p2
-            else: # 是其父节点的右孩子
-                while p2.left != p1 and p2 != None:
-                    p1 = p2
-                    p2 = p2.parent
-                pnext = p2
+    def Getfather(self, pnode):
+        # write code here
+        # 当前节点有右节点
+        pnext = TreeLinkNode(None)
+        pright = pnode.right
+        if pright:
+            while pright.left:
+                pright = pright.left
+            pnext = pright
+
+        # 当前节点无有右节点
+        else:
+            pcurrent = pnode
+            pfather = pnode.father
+            # 当前节点是其父节点的左孩子
+            if pfather and pfather.left == pcurrent:
+                pnext = pfather
+            # 当前节点是其父节点的右孩子
+            else:
+                while pfather and pfather.left != pcurrent:
+                    pcurrent = pfather
+                    pfather = pfather.father
+                pnext = pfather
         return pnext
-
-
-if __name__ == "__main__":
-    pass
-
