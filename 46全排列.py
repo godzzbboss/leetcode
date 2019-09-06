@@ -10,62 +10,36 @@ from collections import deque
 
 
 class Solution():
+    res = []
+    """dfs实现全排列"""
+    def permute(self, nums):
+        if not nums:
+            return []
+        flag = [False] * len(nums)
+        self.dfs(nums, 0, flag, [])
+        return self.res
 
-    def __init__(self):
-        self.result = []
-
-    def test(self, nums, start, end):
-        self.perm(nums, start, end)
-
-        return self.result
-
-
-    def perm(self, nums, start, end):
+    def dfs(self, nums, u, flag, path):
         """
 
         :param nums:
-        :param start:
-        :param end:
+        :param u: 当前搜索到哪个位置
+        :param flag: 记录每个数是否使用过
+        :param path: 记录当前路径
         :return:
         """
-
-        if start == end: # 全排列完成或者只有一个元素
-            _ = []
-            for i in range(0, end+1): # 虽然是对指定部分做全排列，但是还是要全部分返回
-                _.append(nums[i])
-            self.result.append(_)
-
-        for i in range(start, end+1):
-            nums[i], nums[start] = nums[start], nums[i]
-            self.perm(nums, start+1, end)
-            nums[i], nums[start] = nums[start], nums[i]
-
-
-    # 用队列实现全排列
-    from collections import deque
-    # def permut(self, nums):
-    #     if not nums:
-    #         return [[]]
-    #     d = deque([[]])
-    #     while 1:
-    #         if len(d[0]) == len(nums): #完成全排列
-    #             break
-    #         temp = d.popleft()
-    #         for val in nums:
-    #             if val in temp:
-    #                 continue
-    #             else:
-    #                 d.append(temp + [val])
-    #     return list(d)
-
-
-
-
-
+        if u == len(nums): # 找到一个全排列
+            self.res.append(path)
+            return
+        for i in range(len(nums)):
+            if flag[i] == False:
+                path_ = path.copy()
+                path_.append(nums[i])
+                flag[i] = True
+                self.dfs(nums, u+1, flag, path_)
+                flag[i] = False # 回溯时恢复现场
 
 if __name__ == "__main__":
     s = Solution()
     nums = ["a", "b", "c", "d"]
-    # a = s.permut(nums)
-    a = s.test(nums, 0, len(nums) - 1)
-    print(a)
+    print(s.permute(nums))
