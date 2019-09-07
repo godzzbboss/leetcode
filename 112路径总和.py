@@ -6,27 +6,40 @@ __author__ == "BigBrother"
 """
 
 
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
 class Solution:
-    def test(self, root, target):
-        """给定一个二叉树和一个目标和，判断该树中是否存在根节点到叶子节点的路径，这条路径上所有节点值相加等于目标和"""
+    flag = False
+
+    def hasPathSum(self, root, sum):
         if not root:
             return False
-        count = 0
-        return self.dfs(root, target, count)
+        self.dfs(root, sum, 0)
+        return self.flag
 
-    def dfs(self, root, target, count):
-        """前序遍历"""
-        count += root.val
-        if not root.left and not root.right and count == target:
-            return True
-
-        l = r = False
-        if root.left:
-            l = self.dfs(root.left, target, count)
-        if root.right:
-            r = self.dfs(root.right, target, count)
-        return l or r
-
+    def dfs(self, root, sum, count):
+        """
+            count记录当前路径之和
+        """
+        # 遍历到叶节点，即找到一条路径
+        if not root.left and not root.right:
+            count += root.val
+            if count == sum:
+                self.flag = True
+            return
+        # 没有找到一条合法路径
+        if not self.flag:
+            count += root.val
+            if root.left:
+                self.dfs(root.left, sum, count)
+            if root.right:
+                self.dfs(root.right, sum, count)
+            count -= root.val  # 回溯恢复现场
 
 
 if __name__ == "__main__":
