@@ -16,7 +16,7 @@ for i in range(n):
 
 d = [[-1]*m for i in range(n)] # 初始化每个点到左上角起始点的距离
 flag =  [[False]*m for i in range(n)]# 记录每个点是否访问过
-q = []
+q = [] # 队列
 
 q.append([0,0]) # 头节点入队, 每个点用其下标表示
 d[0][0] = 0
