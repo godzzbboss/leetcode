@@ -6,52 +6,47 @@ __author__ = "BigBrother"
 """
 
 
-class Solution():
+class Solution(object):
+    dx = [0, 0, 1, -1]
+    dy = [1, -1, 0, 0]
 
-    def test(self, matrix, rows, cols, s):
-        flag = [False] * len(matrix)
-        if len(matrix) == 0:
+    def hasPath(self, matrix, string):
+        """
+        :type matrix: List[List[str]]
+        :type string: str
+        :rtype: bool
+        """
+        if not matrix or not matrix[0]:
             return False
-        if len(s) == 0:
-            return True
+        rows = len(matrix)
+        cols = len(matrix[0])
+        flag = [[False] * cols for i in range(rows)]
+
         for i in range(rows):
             for j in range(cols):
-                if self.is_has_path(matrix, rows, cols, i, j, s, 0, flag):
+                if self.dfs(matrix, rows, cols, i, j, string, 0, flag):
                     return True
         return False
 
+    def dfs(self, matrix, rows, cols, i, j, string, k, flag):
 
-    def is_has_path(self, matrix, rows, cols, i, j, s, k, flag):
-        if i < 0 or j < 0 or i >= rows or j >= cols:
+        if i < 0 or i >= rows or j < 0 or j >= cols:
             return False
-        index = i * cols + j
-
-        if matrix[index] != s[k] or flag[index] == True:
+        if matrix[i][j] != string[k] or flag[i][j] == True:
             return False
-
-        if k == len(s) - 1:
+        if k == len(string) - 1 and matrix[i][j] == string[k]:
             return True
 
-        flag[index] = True
-
-        # 从 index 周围的四个格子中继续找路径
-        if self.is_has_path(matrix, rows, cols, i-1, j, s, k+1) or \
-            self.is_has_path(matrix, rows, cols, i+1, j, s, k + 1) or\
-            self.is_has_path(matrix, rows, cols, i, j-1, s, k + 1) or\
-            self.is_has_path(matrix, rows, cols, i, j+1, s, k + 1):
-
-            return True
-
-        # 没找到，说明从index这个位置开始找，找不到路径，将flag设为False
-        flag[index] = False
-
+        flag[i][j] = True  # 遍历该点
+        bool_f = False
+        for idx in range(4):
+            i_ = i + self.dx[idx]
+            j_ = j + self.dy[idx]
+            bool_f = bool_f or self.dfs(matrix, rows, cols, i_, j_, string, k + 1, flag)
+        flag[i][j] = False  # 恢复现场
+        if bool_f:
+            return True  # 从该点遍历能找到一条路径
         return False
-
-
-
-
-
-
 
 if __name__ == "__main__":
     s = Solution()
