@@ -30,7 +30,7 @@ class Solution():
         return 1 + res
 
     def transform(self, num):
-        """将一个数转为各个位相乘"""
+        """将一个数转为各个位相加"""
         sum = 0
         while num:
             sum += num % 10 # 取个位数
