@@ -10,28 +10,29 @@ class LinkNode:
         self.val = val
         self.next = None
 
-class Solution():
-    def test(self, head):
-        if head is None or head.next is None:
-            return head
-        phead = LinkNode("a") # 创建一个头结点
-        phead.next = head
-        p = phead
-        while p:
-            while p.next and p.val != p.next.val: #找到重复元素的第一个位置
-                pre = p # p的前驱
+class Solution(object):
+    def deleteDuplication(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        if not head:
+             return None
+        dummy = LinkNode("a") # 虚拟头节点
+        dummy.next = head
+        p = dummy
+        while p.next:
+            q = p.next
+            while q and p.next.val == q.val: q = q.next
+
+            if p.next.next == q:
                 p = p.next
-            q = p
-            while q and q.val == p.val: # 找到不等于p的第一个节点
-                q = q.next
-            if q is None:
-                if p.next is None: # 说明p指向链表最后一个节点, 后面没重复元素
-                    return phead.next
-                else:
-                    pre.next = None
-                    return phead.next
-            pre.next = q
-            p = q
+            else:
+                p.next = q
+        return dummy.next
+
+
+
 
 
 if __name__ == "__main__":
