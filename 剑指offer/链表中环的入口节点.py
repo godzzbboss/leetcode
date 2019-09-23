@@ -26,12 +26,12 @@ class Solution():
 
     def has_circle(self, head):
         """判断链表是否有环，无环返回None,有环返回快慢指针的相遇节点"""
-        if head is None or head.next is None or head.next.next is None:
+        if not head or not head.next or not head.next.next:
             return None
         slow = head.next
         fast = head.next.next
         while slow.val != fast.val:
-            if slow.next is not None and fast.next.next is not None: # 赋值的时候先判断
+            if slow.next and fast.next and fast.next.next: # 赋值的时候先判断
                 slow = slow.next
                 fast = fast.next.next
             else:
