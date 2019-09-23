@@ -4,48 +4,34 @@
 __author__ = "BigBrother"
 
 """
-
-
-class Solution():
-    def test(self, s, pattern):
-
-        return self.str_match(s, pattern, 0, 0)
-
-
-
-    def str_match(self, s, pattern, s_start, p_start):
+class Solution(object):
+    def isMatch(self, s, p):
+        """
+        :type s: str
+        :type p: str
+        :rtype: bool
+        """
+        s = " " + s
+        p = " " + p
         s_len = len(s)
-        p_len = len(pattern)
+        p_len = len(p)
+        f = [[False] * (p_len+10) for i in range(s_len+10)] # f[i][j]表示s的前i个字符与p的前j个字符是否匹配
+        f[0][0] = True
+        for i in range(0, s_len):
+            for j in range(1, p_len):
+                if i >= 1 and (s[i] == p[j] or p[j] == "."):
+                    f[i][j] = f[i][j] or f[i-1][j-1]
+                if p[j] == "*":
+                    if j >= 2: # *匹配0个前面字符
+                        f[i][j] = f[i][j] or f[i][j-2]
+                    if i >= 1 and (s[i] == p[j-1] or p[j-1] == "."):
+                        f[i][j] = f[i][j] or f[i-1][j]
+        return f[s_len-1][p_len-1]
 
-        if s_start == s_len and p_start == p_len: # 匹配成功
-            return True
-        if s_start != s_len and p_start == p_len:
-            return False
-
-        # pattern 的第二位为*
-        if p_start + 1 < p_len and pattern[p_start + 1] == "*":
-            # 第一位匹配成功
-            if s_start < s_len and (s[s_start] == pattern[p_start] or pattern[p_start] == "."):
-                # 此时分三种情况，*重复前面的字符0,1，多次
-                return self.str_match(s, pattern, s_start, p_start+2) or self.str_match(s, pattern, s_start+1, p_start+2) or\
-                       self.str_match(s, pattern, s_start+1, p_start)
-
-            else:
-                return self.str_match(s, pattern, s_start, p_start+2)
-
-        else:
-            # 第二位不为*,且第一位匹配成功
-            if s_start < s_len and (s[s_start] == pattern[p_start] or pattern[p_start] == "."):
-                return self.str_match(s, pattern, s_start+1, p_start+1)
-
-        return False
+s = Solution()
+a = "mississippiaababmississippiaababmississippiaababmississippiaababissippiaabbmississippiaababmississippiaababmissmississippiaababmississippiaababmississippiaababmississippiaababissippiaabbmississippiaababmississippiaababmiss"
+b = "mis*is*ip*.c*a*b.*mis*is*ip*.c*a*b.*mis*is*ip*.c*a*b.*mis*is*ip*.c*a*b.*is*ip*.c*a*bb.*mis*is*ip*.c*a*b.*mis*is*ip*.c*a*b.*mis*mis*is*ip*.c*a*b.*mis*is*ip*.c*a*b.*mis*is*ip*.c*a*b.*mis*is*ip*.c*a*b.*is*ip*.c*a*bb.*mis*is*ip*.c*a*b.*mis*is*ip*.c*a*b.*mis*"
+print(s.isMatch(a,b))
 
 
-
-
-
-
-if __name__ == "__main__":
-    s = Solution()
-    print(s.test())
 
